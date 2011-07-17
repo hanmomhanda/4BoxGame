@@ -417,6 +417,9 @@ function deleteGameData() {
      <tr>
        <td width='110' align=center><div id='divPreview' style='height:30px;width:100px;border:1px solid #d4d4d4;background-color:#0000FF;'>&nbsp;</div></td>       
      </tr>
+     <tr>
+       <td align="center"><span id="colorHex"></span></td>
+     </tr>
    </table>  
    </td>
    <?php 
@@ -460,8 +463,8 @@ function deleteGameData() {
     <td align="center"><button id="replay" style="width:300px;" class="button" onclick="location.reload()">다시하기</button></td>    
   </tr>
   <tr>
-    <td align="center"><span id="colorHex"></span></td>
-    <td align="center"><span id="currentPlayer"></span></td>    
+    <td align="center"></td>
+    <td align="center"></td>    
   </tr>
 </table>
 <span id="dummy"></span>
