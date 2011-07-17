@@ -1,10 +1,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../css/css3buttons.css" media="screen">
-<script type="text/javascript" src="../js/JQuery-162.js"></script>
-<script type="text/javascript" src="../js/AjaxCommon.js"></script>
-<script type="text/javascript" src="../js/smartupdater-3.1.00.beta.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/css3buttons.css" media="screen">
+<script type="text/javascript" src="./js/JQuery-162.js"></script>
+<script type="text/javascript" src="./js/AjaxCommon.js"></script>
+<script type="text/javascript" src="./js/smartupdater-3.1.00.beta.js"></script>
 <title>▩4목박스게임▩</title>
 <style>
 .mainTable {
