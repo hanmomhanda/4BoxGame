@@ -263,7 +263,7 @@ function disableCells() {
 
 function deleteGameData() {
     var ajaxUrl = "fileDeleter.php";
-    sendRequest(ajaxUrl, null, null, null, true);	
+    sendRequest(ajaxUrl, null, null, null, false);	
 }
 
 function reloadGame() {
