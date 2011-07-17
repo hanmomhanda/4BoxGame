@@ -1,3 +1,9 @@
+<?php 
+$fieldWidth = 16;
+$fieldHeight = 15;
+$cellWidth = 26;
+$cellHeight = 26;
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,10 +21,18 @@
   cursor : pointer;
 }
 .gameCell {  
+  font-size : 22px;
   border-top : 1px dotted #444;
   border-right : 1px dotted #444;
   border-bottom : 1px dotted #444;
   border-left : 1px dotted #444;
+  cursor : pointer;
+}
+.bottom {
+  border-top : 2px solid #996633;
+  border-right : 2px solid #996633;
+  border-bottom : 2px solid #996633;
+  border-left : 2px solid #996633;
   cursor : pointer;
 }
 </style>
@@ -27,8 +41,8 @@ var PLAYER_NO = Math.round(Math.random()*100000);
 var ENEMY_NO = 0;
 var INITIAL_COLORHEX="#0000FF";
 var TOTAL_CLICK=0;
-var FIELD_WIDTH=20;
-var FIELD_HEIGHT=15;
+var FIELD_WIDTH=<?php echo $fieldWidth;?>;
+var FIELD_HEIGHT=<?php echo $fieldHeight;?>;
 var IS_COLOR_SELECTED = false;
 var IS_FINISHED = false;
 var IS_PLAYED = false;
@@ -237,6 +251,7 @@ function finishGame(playerNo) {
 	confirm( playerNo+"님이 총 "+TOTAL_CLICK+"수만에 승리하였습니다!!" );
 	disableCells();
     document.getElementById("alarm").innerHTML="";
+    deleteGameData();
 }
 
 function disableCells() {
@@ -246,21 +261,25 @@ function disableCells() {
     }    
 }
 
+function deleteGameData() {
+    var ajaxUrl = "fileDeleter.php";
+    sendRequest(ajaxUrl, null, null, null, true);	
+}
 </script>
 </head>
-<body onload="">
+<body onload="" ondragstart="return false;" onselectstart="return false;">
 <form>
-<table class="mainTable" cellspacing="0" cellpadding="0">
-  <col width=300>
+<table class="mainTable" cellspacing="0" cellpadding="0" border="0">
+  <col width=250>
   <?php 
-  for ($i=0;$i<20;$i++) {
+  for ($i=0;$i<$fieldWidth;$i++) {
   ?>
-  <col width=20>
+  <col width=<?php echo $cellWidth;?>>
   <?php 
   }
   ?>
   <tr>
-   <td rowspan=15 height=20 align=center><span id="playerNo"></span>   
+   <td rowspan=<?php echo $fieldHeight+1;?> height=<?php echo $cellHeight;?> align=center><span id="playerNo"></span>   
    <div id='divColorMap1'>
    <img border='0' style='margin-right:2px;' src='./images/colormap.gif' usemap='#colormap1' alt='colormap1' />   
    <map id='colormap1' name='colormap1' onmouseout='mouseOutMap()'>
@@ -401,21 +420,21 @@ function disableCells() {
    </table>  
    </td>
    <?php 
-   for ( $i=281;$i<=300;$i++) {
+   for ( $i=($fieldWidth*($fieldHeight-1)+1);$i<=($fieldWidth*$fieldHeight);$i++) {
    ?>
-   <td height=20><div id="<?php echo $i?>" name="gameCell" class="gameCell" onclick="clickCell(this)" style="color: #fff;">0</div></td>
+   <td height=<?php echo $cellHeight;?>><div id="<?php echo $i?>" name="gameCell" class="gameCell" onclick="clickCell(this)" style="color: #fff;">0</div></td>
    <?php    
    }
    ?>        
   </tr>
   <?php
-  for ($i=260;$i>=0;$i-=20) { 
+  for ($i=$fieldWidth*($fieldHeight-2);$i>=0;$i-=$fieldWidth) { 
   ?>
   <tr>
   <?php
-  for ($j=1;$j<=20;$j++) { 
+  for ($j=1;$j<=$fieldWidth;$j++) { 
   ?>
-    <td height="20"><div id="<?php echo ($i+$j)?>" name="gameCell" class="gameCell" onclick="clickCell(this)" style="color: #fff;">0</div></td>
+    <td height=<?php echo $cellHeight;?>><div id="<?php echo ($i+$j)?>" name="gameCell" class="gameCell" onclick="clickCell(this)" style="color: #fff;">0</div></td>
   <?php 
   }
   ?>
@@ -423,10 +442,19 @@ function disableCells() {
   <?php 
   }
   ?>
+  <tr>
+  <?php
+  for ($j=1;$j<=$fieldWidth;$j++) { 
+  ?>
+    <td class="bottom" height=2></td>
+  <?php 
+  }
+  ?>
+  </tr>
 </table>
 </form>
-<table width=1000>
-  <col width=300><col width=400><col width=300>
+<table>
+  <col width=250><col width=<?php echo $cellWidth*$fieldWidth;?>>
   <tr>
     <td align="center"><span id="alarm" name="alarmer"></span></td>
     <td align="center"><button id="replay" style="width:300px;" class="button" onclick="location.reload()">다시하기</button></td>    
@@ -440,7 +468,7 @@ function disableCells() {
 <script>
 $("#dummy").smartupdater({
     url : './data/gameData.txt',
-    minTimeout: 3000 // 5 seconds
+    minTimeout: 2000 // 5 seconds
     }, function (data) {
     	var totalClick = 0;        
     	var playerNo = 0;
