@@ -262,7 +262,7 @@ function disableCells() {
   <tr>
    <td rowspan=15 height=20 align=center><span id="playerNo"></span>   
    <div id='divColorMap1'>
-   <img border='0' style='margin-right:2px;' src='../images/colormap.gif' usemap='#colormap1' alt='colormap1' />   
+   <img border='0' style='margin-right:2px;' src='./images/colormap.gif' usemap='#colormap1' alt='colormap1' />   
    <map id='colormap1' name='colormap1' onmouseout='mouseOutMap()'>
      <area style='cursor:pointer' shape='poly' coords='63,0,72,4,72,15,63,19,54,15,54,4' onclick='clickColor("#003366",20,54)' onmouseover='mouseOverColor("#003366")' alt='#003366' />
      <area style='cursor:pointer' shape='poly' coords='81,0,90,4,90,15,81,19,72,15,72,4' onclick='clickColor("#336699",20,72)' onmouseover='mouseOverColor("#336699")' alt='#336699' />
