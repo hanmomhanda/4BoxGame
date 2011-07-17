@@ -265,6 +265,11 @@ function deleteGameData() {
     var ajaxUrl = "fileDeleter.php";
     sendRequest(ajaxUrl, null, null, null, true);	
 }
+
+function reloadGame() {
+    deleteGameData();
+    location.reload();
+}
 </script>
 </head>
 <body onload="" ondragstart="return false;" onselectstart="return false;">
@@ -460,7 +465,7 @@ function deleteGameData() {
   <col width=250><col width=<?php echo $cellWidth*$fieldWidth;?>>
   <tr>
     <td align="center"><span id="alarm" name="alarmer"></span></td>
-    <td align="center"><button id="replay" style="width:300px;" class="button" onclick="location.reload()">다시하기</button></td>    
+    <td align="center"><button id="replay" style="width:300px;" class="button" onclick="reloadGame()">다시하기</button></td>    
   </tr>
   <tr>
     <td align="center"></td>
